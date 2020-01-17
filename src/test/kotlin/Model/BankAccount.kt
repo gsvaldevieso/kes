@@ -9,6 +9,10 @@ class BankAccount(private val id: UUID): AggregateRoot() {
     var balance: BigDecimal = BigDecimal.ZERO
         private set
 
+    init {
+        this.applyChange(AccountCreated())
+    }
+
     private fun whenDepositPerformed(event: DepositPerformed) {
         this.balance += event.amount
     }
